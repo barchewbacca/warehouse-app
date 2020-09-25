@@ -2,3 +2,7 @@
 
 /dist
 /coverage
+/node_modules
+
+# Ignore all SCSS files as Stylelint is taking care of them:
+*.scss

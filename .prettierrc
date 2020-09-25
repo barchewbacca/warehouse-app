@@ -1,3 +1,8 @@
 {
-  "singleQuote": true
+  "arrowParens": "avoid",
+  "htmlWhitespaceSensitivity": "strict",
+  "proseWrap": "always",
+  "semi": true,
+  "singleQuote": true,
+  "trailingComma": "es5"
 }

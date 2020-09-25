@@ -1,13 +1,20 @@
 {
-  "rulesDirectory": [
-    "node_modules/@nrwl/workspace/src/tslint",
-    "node_modules/codelyzer"
-  ],
+  "extends": "tslint-config-prettier",
+  "rulesDirectory": ["node_modules/@nrwl/workspace/src/tslint", "node_modules/codelyzer"],
   "linterOptions": {
     "exclude": ["**/*"]
   },
   "rules": {
     "arrow-return-shorthand": true,
+    "ban": [
+      true,
+      { "name": "fdescribe", "message": "Using 'fdescribe' would ignore all other test suites" },
+      { "name": "fit", "message": "Using 'fit' would ignore all other tests" },
+      {
+        "name": ["browser", "sleep"],
+        "message": "Using 'sleep' adds a fixed delay in the pipeline. Wait on a condition instead"
+      }
+    ],
     "callable-types": true,
     "class-name": true,
     "deprecation": {
@@ -20,12 +27,7 @@
     "member-ordering": [
       true,
       {
-        "order": [
-          "static-field",
-          "instance-field",
-          "static-method",
-          "instance-method"
-        ]
+        "order": ["static-field", "instance-field", "static-method", "instance-method"]
       }
     ],
     "no-arg": true,
