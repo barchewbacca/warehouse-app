@@ -29,13 +29,10 @@
 }
 
 .stock {
+  color: var(--orange);
   font-size: 12px;
 
   &.available {
     color: var(--green);
-  }
-
-  &.unavailable {
-    color: var(--orange);
   }
 }

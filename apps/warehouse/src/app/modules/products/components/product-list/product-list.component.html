@@ -1,18 +1,20 @@
-<div class="card" *ngFor="let product of products">
-  <div class="head">
-    <h3 class="title">{{ product.name }}</h3>
-    <span class="price">€{{ product.price }}</span>
-  </div>
+<ng-container *ngIf="products.length; else elseBlock">
+  <div class="card" *ngFor="let product of products">
+    <div class="head">
+      <h3 class="title">{{ product.name }}</h3>
+      <span class="price">€{{ product.price }}</span>
+    </div>
 
-  <div class="body">
-    <ng-container *ngIf="product.amount; else unavailableAtStock">
-      <p class="stock available"
-        >Available at stock: <strong>{{ product.amount }}</strong></p
-      >
-    </ng-container>
-    <ng-template #unavailableAtStock>
-      <p class="stock unavailable">Unavailable at stock</p>
-    </ng-template>
-    <button class="button" *ngIf="product.amount" type="button" (click)="handleOrderButtonClick(product)">Buy</button>
+    <div class="body">
+      <p class="stock" [class.available]="product.amount">
+        Available at stock: <strong>{{ product.amount }}</strong>
+      </p>
+      <button class="button" *ngIf="product.amount" type="button" (click)="handleOrderButtonClick(product)">Buy</button>
+    </div>
   </div>
-</div>
+</ng-container>
+
+<ng-template #elseBlock>
+  <p>No product configurations added.</p>
+  <p>You may upload them via the "Upload product configurations" button.</p>
+</ng-template>

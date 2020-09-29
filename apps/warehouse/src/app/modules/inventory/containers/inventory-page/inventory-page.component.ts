@@ -25,7 +25,7 @@ export class InventoryPageComponent implements OnDestroy {
     this.inventoryService
       .uploadArticles(fileToUpload)
       .pipe(takeUntil(this.destroyed$))
-      .subscribe(_ => {
+      .subscribe(() => {
         this.fileUpload$.next({});
         this.fileUploadInput.nativeElement.value = '';
       });

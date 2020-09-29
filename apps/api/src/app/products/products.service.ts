@@ -24,12 +24,12 @@ export class ProductsService {
 
         const articleCapacity = await Promise.all(
           configuration.map(async ({ amount, articleId }) => {
-            const { stock } = await this.articleModel.findOne({ id: articleId }).exec();
-            return Math.floor(stock / amount);
+            const article = await this.articleModel.findOne({ id: articleId }).exec();
+            return article ? Math.floor(article.stock / amount) : 0;
           })
         );
 
-        return { id: _id, name, price, amount: Math.min(...articleCapacity) } as ProductEntity;
+        return { id: _id, name, price, amount: Math.min(...articleCapacity) };
       })
     );
   }

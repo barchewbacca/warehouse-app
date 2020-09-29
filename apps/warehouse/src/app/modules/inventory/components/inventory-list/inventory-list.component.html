@@ -1,17 +1,19 @@
-<div class="card" *ngFor="let article of inventory">
-  <div class="head">
-    <h3 class="title">{{ article.name }}</h3>
-    <span class="id">ID: {{ article.id }}</span>
-  </div>
+<ng-container *ngIf="inventory.length; else elseBlock">
+  <div class="card" *ngFor="let article of inventory">
+    <div class="head">
+      <h3 class="title">{{ article.name | titlecase }}</h3>
+      <span class="id">ID: {{ article.id }}</span>
+    </div>
 
-  <div class="body">
-    <ng-container *ngIf="article.stock; else unavailableAtStock">
-      <p class="stock available">
+    <div class="body">
+      <p class="stock" [class.available]="article.stock">
         Available at stock: <strong>{{ article.stock }}</strong>
       </p>
-    </ng-container>
-    <ng-template #unavailableAtStock>
-      <p class="stock unavailable">Unavailable at stock</p>
-    </ng-template>
+    </div>
   </div>
-</div>
+</ng-container>
+
+<ng-template #elseBlock>
+  <p>No articles in the stock.</p>
+  <p>You may upload them via the "Upload inventory" button.</p>
+</ng-template>
