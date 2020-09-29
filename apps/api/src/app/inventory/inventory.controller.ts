@@ -13,11 +13,11 @@ export class InventoryController {
   @UseInterceptors(FileInterceptor('file'))
   async create(@UploadedFile() file) {
     const inventory = JSON.parse(file.buffer).inventory as ArticleEntity[];
-    this.inventoryService.fileUpload(inventory);
+    await this.inventoryService.fileUpload(inventory);
   }
 
   @Get('inventory')
   async getInventory(): Promise<Article[]> {
-    return this.inventoryService.findAll();
+    return await this.inventoryService.findAll();
   }
 }

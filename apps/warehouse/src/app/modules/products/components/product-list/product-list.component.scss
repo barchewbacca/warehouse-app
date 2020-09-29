@@ -17,6 +17,8 @@
 }
 
 .head + .body {
+  min-height: 28px;
+  align-items: center;
   margin-top: 8px;
 }
 
@@ -35,4 +37,8 @@
   &.available {
     color: var(--green);
   }
+}
+
+.no-results {
+  font-size: 14px;
 }

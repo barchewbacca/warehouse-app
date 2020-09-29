@@ -9,10 +9,10 @@ export class InventoryService {
   constructor(@InjectModel(Article.name) private articleModel: Model<Article>) {}
 
   async findAll(): Promise<Article[]> {
-    return this.articleModel.find({}, '-_id id name stock').sort({ id: 1 }).exec();
+    return await this.articleModel.find({}, '-_id id name stock').sort({ id: 1 }).exec();
   }
 
-  async fileUpload(articles: ArticleEntity[]) {
+  async fileUpload(articles: ArticleEntity[]): Promise<Article[]> {
     const newArticles: Article[] = articles.map(
       ({ art_id, name, stock }) =>
         ({
@@ -22,10 +22,12 @@ export class InventoryService {
         } as Article)
     );
 
-    newArticles.forEach(({ id, name, stock }) => {
-      this.articleModel
-        .findOneAndUpdate({ id }, { name, $inc: { stock } }, { useFindAndModify: false, upsert: true })
-        .exec();
-    });
+    return await Promise.all(
+      newArticles.map(async ({ id, name, stock }) => {
+        return await this.articleModel
+          .findOneAndUpdate({ id }, { name, $inc: { stock } }, { useFindAndModify: false, upsert: true })
+          .exec();
+      })
+    );
   }
 }

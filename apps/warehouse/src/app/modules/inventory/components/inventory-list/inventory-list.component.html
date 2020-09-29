@@ -1,4 +1,4 @@
-<ng-container *ngIf="inventory.length; else elseBlock">
+<ng-container *ngIf="inventory.length; else noResultsBlock">
   <div class="card" *ngFor="let article of inventory">
     <div class="head">
       <h3 class="title">{{ article.name | titlecase }}</h3>
@@ -13,7 +13,9 @@
   </div>
 </ng-container>
 
-<ng-template #elseBlock>
-  <p>No articles in the stock.</p>
-  <p>You may upload them via the "Upload inventory" button.</p>
+<ng-template #noResultsBlock>
+  <div class="no-results">
+    <p>No articles in the stock.</p>
+    <p>You may upload them via the "Upload inventory" button.</p>
+  </div>
 </ng-template>

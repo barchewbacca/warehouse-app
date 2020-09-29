@@ -35,22 +35,24 @@ export class ProductsService {
   }
 
   async fileUpload(configurationList: ProductEntity[]) {
-    configurationList.forEach(async ({ name, price, contain_articles }) => {
-      const product = await this.productModel.findOne({ name }).exec();
-      const configurationId = product ? product.configurationId : nanoid();
+    return await Promise.all(
+      configurationList.map(async ({ name, price, contain_articles }) => {
+        const product = await this.productModel.findOne({ name }).exec();
+        const configurationId = product ? product.configurationId : nanoid();
 
-      if (!product) {
-        this.productModel.create({ name, price, configurationId });
-      }
+        if (!product) {
+          this.productModel.create({ name, price, configurationId });
+        }
 
-      const configuration: Unit[] = contain_articles.map(
-        item => ({ articleId: item.art_id, amount: +item.amount_of } as Unit)
-      );
+        const configuration: Unit[] = contain_articles.map(
+          item => ({ articleId: item.art_id, amount: +item.amount_of } as Unit)
+        );
 
-      this.configurationModel
-        .findOneAndUpdate({ id: configurationId }, { configuration }, { useFindAndModify: false, upsert: true })
-        .exec();
-    });
+        return await this.configurationModel
+          .findOneAndUpdate({ id: configurationId }, { configuration }, { useFindAndModify: false, upsert: true })
+          .exec();
+      })
+    );
   }
 
   async order(productId: string) {

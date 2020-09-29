@@ -11,16 +11,16 @@ export class ProductsController {
   @UseInterceptors(FileInterceptor('file'))
   async uploadConfiguration(@UploadedFile() file) {
     const configurations = JSON.parse(file.buffer).products as ProductEntity[];
-    this.productsService.fileUpload(configurations);
+    await this.productsService.fileUpload(configurations);
   }
 
   @Get('products')
   async getProducts(): Promise<ProductEntity[]> {
-    return this.productsService.findAll();
+    return await this.productsService.findAll();
   }
 
   @Delete('products/:productId')
   async order(@Param() params) {
-    this.productsService.order(params.productId);
+    await this.productsService.order(params.productId);
   }
 }
