@@ -13,6 +13,6 @@
   </button>
 </div>
 
-<ng-container *ngFor="let article of inventory$ | async">
-  <p>{{ article.name }}: {{ article.stock }}</p>
+<ng-container *ngIf="inventory$ | async as inventory">
+  <warehouse-app-inventory-list [inventory]="inventory"></warehouse-app-inventory-list>
 </ng-container>
