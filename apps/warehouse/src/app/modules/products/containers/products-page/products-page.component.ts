@@ -29,7 +29,6 @@ export class ProductsPageComponent implements OnDestroy {
   }
 
   onProductOrdered(product: Product) {
-    console.log('Product ordered', product);
     this.productsService.order(product).subscribe(() => this.updateProducts$.next({}));
   }
 

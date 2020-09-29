@@ -35,11 +35,9 @@ export class ProductsService {
   }
 
   async fileUpload(configurationList: ProductEntity[]) {
-    console.log('Products upload', configurationList);
     configurationList.forEach(async ({ name, price, contain_articles }) => {
       const product = await this.productModel.findOne({ name }).exec();
       const configurationId = product ? product.configurationId : nanoid();
-      console.log('Product found', product);
 
       if (!product) {
         this.productModel.create({ name, price, configurationId });
@@ -57,11 +55,10 @@ export class ProductsService {
 
   async order(productId: string) {
     const { configurationId } = await this.productModel.findOne({ _id: productId }).exec();
-    console.log('Produccct', configurationId);
     const { configuration } = await this.configurationModel.findOne({ id: configurationId });
-    console.log('Configggg', configuration);
+
     configuration.forEach(async ({ articleId, amount }) => {
-      const article = await this.articleModel.findOneAndUpdate(
+      await this.articleModel.findOneAndUpdate(
         { id: articleId },
         { $inc: { stock: -amount } },
         { useFindAndModify: false, upsert: true }

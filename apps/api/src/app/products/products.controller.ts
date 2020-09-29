@@ -21,7 +21,6 @@ export class ProductsController {
 
   @Delete('products/:productId')
   async order(@Param() params) {
-    console.log('To be removed', params.productId);
     this.productsService.order(params.productId);
   }
 }
