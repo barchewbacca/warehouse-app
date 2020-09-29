@@ -1,0 +1,18 @@
+<div class="top-panel">
+  <h2>Inventory</h2>
+  <button type="button" (click)="fileUploadInput.click()">
+    <span>Upload inventory</span>
+    <input
+      #fileUploadInput
+      type="file"
+      name="file"
+      id="file"
+      class="file-upload-input"
+      (change)="handleFileInput($event.target.files)"
+    />
+  </button>
+</div>
+
+<ng-container *ngFor="let article of inventory$ | async">
+  <p>{{ article.name }}: {{ article.stock }}</p>
+</ng-container>

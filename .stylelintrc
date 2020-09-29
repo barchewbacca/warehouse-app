@@ -12,9 +12,20 @@
       true,
       {
         "ignoreAtRules": [
+          "apply",
+          "at-root",
+          "each",
+          "extend",
+          "forward",
+          "if",
           "include",
+          "layer",
           "mixin",
-          "extend"
+          "responsive",
+          "screen",
+          "tailwind",
+          "use",
+          "variants"
         ]
       }
     ],

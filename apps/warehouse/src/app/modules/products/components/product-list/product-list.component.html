@@ -1,0 +1,11 @@
+<div *ngFor="let product of products">
+  <p>{{ product.name }} €{{ product.price }}</p>
+  <ng-container *ngIf="product.amount; else unavailableAtStock">
+    <p>Available at stock: {{ product.amount }}.</p>
+  </ng-container>
+  <ng-template #unavailableAtStock>
+    <p>Unavailable at stock.</p>
+  </ng-template>
+
+  <button *ngIf="product.amount" type="button" (click)="handleOrderButtonClick(product)">Buy</button>
+</div>

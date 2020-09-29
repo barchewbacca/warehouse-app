@@ -1,0 +1,14 @@
+<header class="header">
+  <div class="container">
+    <nav class="header-inner">
+      <a class="logo" [routerLink]="['/']">Warehouse</a>
+      <a class="link" [routerLink]="['/products']" routerLinkActive="active">Products</a>
+      <a class="link" [routerLink]="['/inventory']" routerLinkActive="active">Inventory</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+</main>
