@@ -17,6 +17,6 @@ export class InventoryController {
 
   @Get('inventory')
   async getInventory(): Promise<Article[]> {
-    return await this.inventoryService.findAll();
+    return await this.inventoryService.getInventory();
   }
 }

@@ -8,7 +8,7 @@ import { Article } from './schemas/article.schema';
 export class InventoryService {
   constructor(@InjectModel(Article.name) private articleModel: Model<Article>) {}
 
-  async findAll(): Promise<Article[]> {
+  async getInventory(): Promise<Article[]> {
     return await this.articleModel.find({}, '-_id id name stock').sort({ id: 1 }).exec();
   }
 
