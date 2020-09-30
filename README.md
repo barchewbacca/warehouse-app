@@ -81,7 +81,7 @@ The platform is now available at
 > [products.json](assignment/products.json) from the repo in order to upload the
 > product configurations and inventory.
 
-## ⛏️ <a name = "technologies"></a>
+## ⛏️ Technologies <a name = "technologies"></a>
 
 - [Nx](https://nx.dev/)
 - [Angular](https://angular.io/)
