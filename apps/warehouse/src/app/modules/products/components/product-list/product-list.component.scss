@@ -1,0 +1,44 @@
+.card {
+  padding: 20px;
+  border: 2px solid var(--light);
+  background-color: var(--white);
+  border-radius: 10px;
+}
+
+.card + .card {
+  margin-top: 16px;
+}
+
+.head,
+.body {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.head + .body {
+  min-height: 28px;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.title,
+.price {
+  color: var(--black);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.stock {
+  color: var(--orange);
+  font-size: 12px;
+
+  &.available {
+    color: var(--green);
+  }
+}
+
+.no-results {
+  font-size: 14px;
+}

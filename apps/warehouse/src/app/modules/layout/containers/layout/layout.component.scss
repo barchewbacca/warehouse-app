@@ -1,0 +1,38 @@
+.header {
+  display: flex;
+  height: 80px;
+  background-color: #fff;
+
+  > .container {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.header-inner {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-start;
+}
+
+.logo {
+  margin-right: 32px;
+  color: var(--ikea-blue);
+  font-size: 20px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.link {
+  color: var(--dark-grey);
+  font-size: 12px;
+  text-decoration: none;
+
+  &.active {
+    color: var(--black);
+  }
+}
+
+.link + .link {
+  margin-left: 24px;
+}

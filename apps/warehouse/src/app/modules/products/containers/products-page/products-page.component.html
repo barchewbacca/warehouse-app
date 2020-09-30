@@ -1,0 +1,18 @@
+<div class="top-panel">
+  <h2>Products</h2>
+  <button type="button" (click)="fileUploadInput.click()">
+    <span>Upload product configurations</span>
+    <input
+      #fileUploadInput
+      type="file"
+      name="file"
+      id="file"
+      class="file-upload-input"
+      (change)="handleFileInput($event.target.files)"
+    />
+  </button>
+</div>
+
+<ng-container *ngIf="products$ | async as products">
+  <warehouse-app-product-list [products]="products" (ordered)="onProductOrdered($event)"></warehouse-app-product-list>
+</ng-container>

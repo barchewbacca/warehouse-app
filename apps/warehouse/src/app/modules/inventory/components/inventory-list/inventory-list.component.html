@@ -1,0 +1,21 @@
+<ng-container *ngIf="inventory.length; else noResultsBlock">
+  <div class="card" *ngFor="let article of inventory">
+    <div class="head">
+      <h3 class="title">{{ article.name | titlecase }}</h3>
+      <span class="id">ID: {{ article.id }}</span>
+    </div>
+
+    <div class="body">
+      <p class="stock" [class.available]="article.stock">
+        Available at stock: <strong>{{ article.stock }}</strong>
+      </p>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #noResultsBlock>
+  <div class="no-results">
+    <p>No articles in the stock.</p>
+    <p>You may upload them via the "Upload inventory" button.</p>
+  </div>
+</ng-template>

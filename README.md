@@ -1,98 +1,93 @@
-# WarehouseApp
+<p align="center">
+  <img src="screenshot.png" alt="Warehouse app screenshot">
+</p>
+<h3 align="center">Warehouse app</h3>
 
-This project was generated using [Nx](https://nx.dev).
+---
 
-<p align="center"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
+## 📝 Table of Contents
 
-🔎 **Nx is a set of Extensible Dev Tools for Monorepos.**
+- [About](#about)
+- [Getting Started](#getting_started)
+- [Technologies](#technologies)
 
-## Quick Start & Documentation
+## 🧐 About <a name = "about"></a>
 
-[Nx Documentation](https://nx.dev/angular)
+This repo is made to showcase one of the test assignments that I have done. The
+requirements for the assignment are quoted below.
 
-[10-minute video showing all Nx features](https://nx.dev/angular/getting-started/what-is-nx)
+> ## The Task
+>
+> The assignment is to implement a warehouse software. This software should hold
+> articles, and the articles should contain an identification number, a name and
+> available stock. It should be possible to load articles into the software from
+> a file, see the attached inventory.json. The warehouse software should also
+> have products, products are made of different articles. Products should have a
+> name, price and a list of articles of which they are made from with a
+> quantity. The products should also be loaded from a file, see the attached
+> products.json.
+>
+> The warehouse should have at least the following functionality;
+>
+> - Get all products and quantity of each that is an available with the current
+>   inventory
+> - Remove(Sell) a product and update the inventory accordingly
 
-[Interactive Tutorial](https://nx.dev/angular/tutorial/01-create-application)
+## 🏁 Getting Started <a name = "getting_started"></a>
 
-## Adding capabilities to your workspace
+These instructions will get you a copy of the project up and running on your
+local machine for development and testing purposes.
 
-Nx supports many plugins which add capabilities for developing different types of applications and different tools.
+### Install client dependencies
 
-These capabilities include generating applications, libraries, etc as well as the devtools to test, and build projects as well.
+```sh
+npm install
+```
 
-Below are our core plugins:
+### Start server and client
 
-- [Angular](https://angular.io)
-  - `ng add @nrwl/angular`
-- [React](https://reactjs.org)
-  - `ng add @nrwl/react`
-- Web (no framework frontends)
-  - `ng add @nrwl/web`
-- [Nest](https://nestjs.com)
-  - `ng add @nrwl/nest`
-- [Express](https://expressjs.com)
-  - `ng add @nrwl/express`
-- [Node](https://nodejs.org)
-  - `ng add @nrwl/node`
+This example requires [docker](https://docs.docker.com/get-docker/) to be
+installed on your machine.
 
-There are also many [community plugins](https://nx.dev/nx-community) you could add.
+#### Database
 
-## Generate an application
+After `docker` installation run this command to make the `mongodb` spinning in a
+container:
 
-Run `ng g @nrwl/angular:app my-app` to generate an application.
+```sh
+docker-compose up -d
+```
 
-> You can use any of the plugins above to generate applications as well.
+#### Server
 
-When using Nx, you can create multiple applications and libraries in the same workspace.
+Run this command to make the backend spinning:
 
-## Generate a library
+```sh
+npx nx serve api
+```
 
-Run `ng g @nrwl/angular:lib my-lib` to generate a library.
+#### Client
 
-> You can also use any of the plugins above to generate libraries as well.
+Run this command to make the frontend spinning:
 
-Libraries are sharable across libraries and applications. They can be imported from `@warehouse-app/mylib`.
+```sh
+npx nx serve warehouse
+```
 
-## Development server
+The platform is now available at
+[http://localhost:4200/](http://localhost:4200/).
 
-Run `ng serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
+> Feel free to use [inventory.json](assignment/inventory.json) and
+> [products.json](assignment/products.json) from the repo in order to upload the
+> product configurations and inventory.
 
-## Code scaffolding
+## ⛏️ <a name = "technologies"></a>
 
-Run `ng g component my-component --project=my-app` to generate a new component.
-
-## Build
-
-Run `ng build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test my-app` to execute the unit tests via [Jest](https://jestjs.io).
-
-Run `nx affected:test` to execute the unit tests affected by a change.
-
-## Running end-to-end tests
-
-Run `ng e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
-
-Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
-
-## Understand your workspace
-
-Run `nx dep-graph` to see a diagram of the dependencies of your projects.
-
-## Further help
-
-Visit the [Nx Documentation](https://nx.dev/angular) to learn more.
-
-## ☁ Nx Cloud
-
-### Computation Memoization in the Cloud
-
-<p align="center"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-cloud-card.png"></p>
-
-Nx Cloud pairs with Nx in order to enable you to build and test code more rapidly, by up to 10 times. Even teams that are new to Nx can connect to Nx Cloud and start saving time instantly.
-
-Teams using Nx gain the advantage of building full-stack applications with their preferred framework alongside Nx’s advanced code generation and project dependency graph, plus a unified experience for both frontend and backend developers.
-
-Visit [Nx Cloud](https://nx.app/) to learn more.
+- [Nx](https://nx.dev/)
+- [Angular](https://angular.io/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [NestJS](https://nestjs.com/)
+- [MongoDB](https://www.mongodb.com/)
+- [Mongoose](https://mongoosejs.com/)
+- [Jest](https://jestjs.io/)
+- [Cypress](https://www.cypress.io/)
