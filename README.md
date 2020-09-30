@@ -68,7 +68,8 @@ npx nx serve api
 
 #### Client
 
-Run this command to make the frontend spinning:
+Keep the backend running. Open a new console tab and run this command to make
+the frontend spinning:
 
 ```sh
 npx nx serve warehouse
