@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Product as ProductEntity } from '@warehouse-app/api-interfaces';
 import { Model } from 'mongoose';
 import { nanoid } from 'nanoid';
 import { Article } from '../inventory/schemas/article.schema';
+import { ProductDto } from './dto/product.dto';
 import { Configuration, Unit } from './schemas/configuration.schema';
 import { Product } from './schemas/product.schema';
 
@@ -15,26 +15,12 @@ export class ProductsService {
     @InjectModel(Article.name) private articleModel: Model<Article>
   ) {}
 
-  async findAll(): Promise<ProductEntity[]> {
+  async findAll(): Promise<ProductDto[]> {
     const products = await this.productModel.find().exec();
-
-    return await Promise.all(
-      products.map(async ({ _id, name, price, configurationId }) => {
-        const { configuration } = await this.configurationModel.findOne({ id: configurationId }).exec();
-
-        const articleCapacity = await Promise.all(
-          configuration.map(async ({ amount, articleId }) => {
-            const article = await this.articleModel.findOne({ id: articleId }).exec();
-            return article ? Math.floor(article.stock / amount) : 0;
-          })
-        );
-
-        return { id: _id, name, price, amount: Math.min(...articleCapacity) };
-      })
-    );
+    return await Promise.all(this.getCalculatedProducts(products));
   }
 
-  async fileUpload(configurationList: ProductEntity[]) {
+  async fileUpload(configurationList: ProductDto[]) {
     return await Promise.all(
       configurationList.map(async ({ name, price, contain_articles }) => {
         const product = await this.productModel.findOne({ name }).exec();
@@ -66,5 +52,20 @@ export class ProductsService {
         { useFindAndModify: false, upsert: true }
       );
     });
+  }
+
+  private getCalculatedProducts(products: Product[]): Promise<ProductDto>[] {
+    return products.map(async ({ _id, name, price, configurationId }) => {
+      const { configuration } = await this.configurationModel.findOne({ id: configurationId }).exec();
+      const productsAmount = await Promise.all(configuration.map(async unit => this.getProductsAmount(unit)));
+
+      return { id: _id, name, price, amount: Math.min(...productsAmount) } as ProductDto;
+    });
+  }
+
+  private async getProductsAmount({ articleId, amount }: Unit): Promise<number> {
+    const article = await this.articleModel.findOne({ id: articleId }).exec();
+
+    return article ? Math.floor(article.stock / amount) : 0;
   }
 }

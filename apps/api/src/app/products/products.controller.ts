@@ -1,6 +1,6 @@
 import { Controller, Delete, Get, Param, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { Product as ProductEntity } from '@warehouse-app/api-interfaces';
+import { ProductDto } from './dto/product.dto';
 import { ProductsService } from './products.service';
 
 @Controller()
@@ -10,17 +10,17 @@ export class ProductsController {
   @Post('products')
   @UseInterceptors(FileInterceptor('file'))
   async uploadConfiguration(@UploadedFile() file) {
-    const configurations = JSON.parse(file.buffer).products as ProductEntity[];
+    const configurations = JSON.parse(file.buffer).products as ProductDto[];
     await this.productsService.fileUpload(configurations);
   }
 
   @Get('products')
-  async getProducts(): Promise<ProductEntity[]> {
+  async getProducts(): Promise<ProductDto[]> {
     return await this.productsService.findAll();
   }
 
   @Delete('products/:productId')
-  async order(@Param() params) {
+  async orderProduct(@Param() params) {
     await this.productsService.order(params.productId);
   }
 }

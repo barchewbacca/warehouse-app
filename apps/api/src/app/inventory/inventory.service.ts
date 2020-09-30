@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Article as ArticleEntity } from '@warehouse-app/api-interfaces';
 import { Model } from 'mongoose';
+import { ArticleDto } from './dto/article.dto';
 import { Article } from './schemas/article.schema';
 
 @Injectable()
@@ -12,7 +12,7 @@ export class InventoryService {
     return await this.articleModel.find({}, '-_id id name stock').sort({ id: 1 }).exec();
   }
 
-  async fileUpload(articles: ArticleEntity[]): Promise<Article[]> {
+  async fileUpload(articles: ArticleDto[]): Promise<Article[]> {
     const newArticles: Article[] = articles.map(
       ({ art_id, name, stock }) =>
         ({

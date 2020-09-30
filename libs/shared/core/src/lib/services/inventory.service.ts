@@ -20,6 +20,6 @@ export class InventoryService {
     const formData = new FormData();
     formData.append('file', file, file.name);
 
-    return this.httpClient.post(this.inventoryEndpoint, formData).pipe(map(_ => true));
+    return this.httpClient.post(this.inventoryEndpoint, formData).pipe(map(() => true));
   }
 }
