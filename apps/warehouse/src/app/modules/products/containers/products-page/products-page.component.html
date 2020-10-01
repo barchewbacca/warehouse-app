@@ -8,7 +8,8 @@
       name="file"
       id="file"
       class="file-upload-input"
-      (change)="handleFileInput($event.target.files)"
+      (change)="handleFileInput($event.target.files.item(0))"
+      data-qa="file-upload-input"
     />
   </button>
 </div>

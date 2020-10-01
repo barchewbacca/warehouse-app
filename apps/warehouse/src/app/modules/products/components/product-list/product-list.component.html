@@ -9,7 +9,14 @@
       <p class="stock" [class.available]="product.amount">
         Available at stock: <strong>{{ product.amount }}</strong>
       </p>
-      <button class="button" *ngIf="product.amount" type="button" (click)="handleOrderButtonClick(product)">Buy</button>
+      <button
+        class="button"
+        *ngIf="product.amount"
+        type="button"
+        (click)="handleOrderButtonClick(product)"
+        data-qa="order-button"
+        >Buy</button
+      >
     </div>
   </div>
 </ng-container>
